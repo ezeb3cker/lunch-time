@@ -506,18 +506,7 @@ export default function LunchPanel() {
                       label="Duração (hh:mm)"
                       placeholder="01:30"
                       value={customTime}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        if (true) {
-                          if (value.length <= 5) {
-                            let formatted = value;
-                            if (formatted.length >= 3) {
-                              formatted = formatted.slice(0, 2) + ":" + formatted.slice(2, 4);
-                            }
-                            setCustomTime(formatted || "00:00");
-                          }
-                        }
-                      }}
+                      onChange={(e) => setCustomTime(e.target.value)}
                       disabled={disabled}
                       fullWidth
                       inputProps={{ maxLength: 5 }}
@@ -587,6 +576,8 @@ export default function LunchPanel() {
             >
               {buttonLabel}
             </Button>
+          )}
+
         </Stack>
         </Paper>
       </Box>
