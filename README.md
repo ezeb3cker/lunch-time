@@ -1,6 +1,6 @@
-# Launch Time - Extensão de horário de almoço
+# Launch Time - Extensão de Horário de Ausência
 
-Aplicação em React (Vite) para gerenciar horário de almoço dos usuários, integrada às rotas:
+Aplicação em React (Vite) para gerenciar Horário de Ausência dos usuários, integrada às rotas:
 
 - `GET https://dev.gruponfa.com/webhook/lunch-time/get_users`
 - `POST https://dev.gruponfa.com/webhook/lunch-time/create_user`

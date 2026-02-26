@@ -226,7 +226,7 @@ export default function LunchPanel() {
       setSaving(true);
       setStatus({
         type: "info",
-        text: "Horário de almoço finalizado automaticamente."
+        text: "Horário de Ausência finalizado automaticamente."
       });
 
       const payload = {
@@ -403,7 +403,7 @@ export default function LunchPanel() {
           }}
         >
           <Box mb={1}>
-            <Typography variant="h6">Horário de almoço</Typography>
+            <Typography variant="h6">Horário de Ausência</Typography>
             <Typography variant="body2" color="text.secondary">
               Configure o intervalo de almoço para este usuário.
             </Typography>
