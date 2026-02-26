@@ -376,7 +376,7 @@ export default function LunchPanel() {
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
-  const buttonLabel = active ? "Encerrar ausência" : "Iniciar ausência";
+  const buttonLabel = active ? "Encerrar" : "Iniciar";
   const disabled = loading || saving || !userId || !systemId;
 
   return (
