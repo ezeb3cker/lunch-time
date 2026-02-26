@@ -127,13 +127,13 @@ export default function LunchPanel() {
           setStatus({
             type: "success",
             text: isActive
-              ? "Almoço já está ativo para este usuário."
-              : "Usuário carregado. Almoço não está ativo."
+              ? "Horário de ausência já está ativo para este usuário."
+              : "Usuário carregado. Horário de ausência não está ativo."
           });
         } else if (!cancelled) {
           setStatus({
             type: "info",
-            text: "Usuário não encontrado. Preencha os dados para iniciar o almoço."
+            text: "Usuário não encontrado. Preencha os dados para iniciar o horário de ausência."
           });
         }
       } catch (e) {
@@ -261,7 +261,7 @@ export default function LunchPanel() {
     } catch (e) {
       setStatus({
         type: "error",
-        text: "Erro ao encerrar almoço automaticamente."
+        text: "Erro ao encerrar horário de ausência automaticamente."
       });
     } finally {
       setSaving(false);
@@ -309,7 +309,7 @@ export default function LunchPanel() {
       setSaving(true);
       setStatus({
         type: "info",
-        text: nextActive ? "Iniciando almoço..." : "Encerrando almoço..."
+        text: nextActive ? "Iniciando horário de ausência..." : "Encerrando horário de ausência..."
       });
 
       let result;
@@ -353,13 +353,13 @@ export default function LunchPanel() {
       setStatus({
         type: "success",
         text: nextActive
-          ? "Almoço iniciado com sucesso."
-          : "Almoço encerrado com sucesso."
+          ? "Horário de ausência iniciado com sucesso."
+          : "Horário de ausência encerrado com sucesso."
       });
     } catch (e) {
       setStatus({
         type: "error",
-        text: "Erro ao salvar os dados de almoço. Tente novamente."
+        text: "Erro ao salvar os dados de ausência. Tente novamente."
       });
     } finally {
       setSaving(false);
@@ -376,7 +376,7 @@ export default function LunchPanel() {
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
-  const buttonLabel = active ? "Encerrar almoço" : "Iniciar almoço";
+  const buttonLabel = active ? "Encerrar ausência" : "Iniciar ausência";
   const disabled = loading || saving || !userId || !systemId;
 
   return (
@@ -405,7 +405,7 @@ export default function LunchPanel() {
           <Box mb={1}>
             <Typography variant="h6">Horário de Ausência</Typography>
             <Typography variant="body2" color="text.secondary">
-              Configure o intervalo de almoço para este usuário.
+              Configure o intervalo de ausência para este usuário.
             </Typography>
           </Box>
 
@@ -461,8 +461,8 @@ export default function LunchPanel() {
                   {sendMessage && (
 
                     <TextField
-                      label="Mensagem de almoço"
-                      placeholder="Digite a mensagem de almoço..."
+                      label="Mensagem de ausência"
+                      placeholder="Digite a mensagem de ausência..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       multiline
@@ -552,7 +552,7 @@ export default function LunchPanel() {
           ) : (
             <Box>
               <Typography variant="subtitle1" gutterBottom>
-                Vai aproveitar o seu almoço
+                Vai aproveitar o seu horário de ausência
               </Typography>
               <Typography variant="h4">
                 {formatTime(elapsedSeconds)}
