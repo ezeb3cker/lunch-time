@@ -6,8 +6,13 @@ const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#1976d2"
+      // Azul original substituído pela cor solicitada
+      main: "#192D3E"
     }
+  },
+  typography: {
+    // Utilizar Roboto como fonte principal
+    fontFamily: 'Roboto, sans-serif'
   }
 });
 
@@ -19,7 +24,7 @@ export default function App() {
         sx={{
           minHeight: "100vh",
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center",
           backgroundColor: "#f0f2f5",
           p: 2

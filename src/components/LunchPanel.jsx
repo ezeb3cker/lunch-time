@@ -44,6 +44,8 @@ export default function LunchPanel() {
   const [sendMessage, setSendMessage] = useState(false);
   const [transfer, setTransfer] = useState(false);
   const [message, setMessage] = useState("");
+  // guarda a mensagem original / última enviada para restaurar caso o switch seja desabilitado e reabilitado
+  const [initialMessage, setInitialMessage] = useState("");
   const [userRecordId, setUserRecordId] = useState(null);
   const [status, setStatus] = useState({ type: "info", text: "Carregando dados do usuário..." });
   const [showConfig, setShowConfig] = useState(true);
@@ -114,6 +116,8 @@ export default function LunchPanel() {
           const hasMessage = !!u.message;
           setSendMessage(hasMessage);
           setMessage(u.message || "");
+          // gravar mensagem inicial para restauração durante o mesmo fluxo
+          setInitialMessage(u.message || "");
 
           if (isActive) {
             setShowConfig(false);
@@ -329,6 +333,8 @@ export default function LunchPanel() {
       }
 
       setActive(nextActive);
+      // armazenar a mensagem atual como a 'inicial' para usos futuros
+      setInitialMessage(finalMessage);
 
       const key = `lunchStart_${userId}_${systemId}`;
       const endKey = `lunchEndTime_${userId}_${systemId}`;
@@ -384,22 +390,23 @@ export default function LunchPanel() {
       <Box
         ref={panelContainerRef}
         sx={{
-          width: 350,
+          width: 320,
           maxWidth: "100%",
-          height: 880,
+          height: "auto",                  // altura automática conforme conteúdo
           maxHeight: "100vh",
-          position: "relative"
+          position: "relative",
+          top: 0 // enviar container para o topo
         }}
       >
         <Paper
           elevation={4}
           sx={{
             width: "100%",
-            height: "100%",
             display: "flex",
             flexDirection: "column",
             p: 2,
-            boxSizing: "border-box"
+            boxSizing: "border-box",
+            height: "auto" // deixa altura livre para crescer/encolher
           }}
         >
           <Box mb={1}>
@@ -430,7 +437,6 @@ export default function LunchPanel() {
         <Stack
           spacing={2}
           sx={{
-            flex: 1,
             overflowY: "auto",
             pr: 0.5,
             pt: 1
@@ -446,9 +452,16 @@ export default function LunchPanel() {
                         <Switch
                           checked={sendMessage}
                           onChange={(e) => {
-                            setSendMessage(e.target.checked);
-                            if (!e.target.checked) {
+                            const checked = e.target.checked;
+                            setSendMessage(checked);
+                            if (!checked) {
+                              // usuário desativou o envio, esvazia campo mas preserva initialMessage
                               setMessage("");
+                            } else {
+                              // reativou: restaura a última mensagem conhecida se não houver texto atual
+                              if (!message) {
+                                setMessage(initialMessage);
+                              }
                             }
                           }}
                           disabled={disabled}
